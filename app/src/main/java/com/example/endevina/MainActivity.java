@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -17,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         final EditText texto = findViewById(R.id.entrada);
         final Button button = findViewById(R.id.button);
+        final TextView historial = findViewById(R.id.histo);
+        final TextView intentos = findViewById(R.id.intent);
         int numero=(int) (Math.random()*100);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -24,15 +27,20 @@ public class MainActivity extends AppCompatActivity {
 
 
                 if(Integer.parseInt(texto.getText().toString())>numero){
-                    Toast.makeText(MainActivity.this, "EL NUMERO ES MAS PEQUEÑO!", Toast.LENGTH_SHORT).show();
+                    historial.append("EL NUMERO ES MAS PEQUEÑO!\n");
+
+
                 }
                 else if(Integer.parseInt(texto.getText().toString())<numero){
-                    Toast.makeText(MainActivity.this, "EL NUMERO ES MAS GRANDE!", Toast.LENGTH_SHORT).show();
+                    historial.append("EL NUMERO ES MAS GRANDE!\n");
+
+
                 }
                 else{
-                    Toast.makeText(MainActivity.this, "HAS ACERTADO", Toast.LENGTH_SHORT).show();
-                }
+                    historial.append("EL NUMERO ES CORRECTOOOOOOOOOOOO!\n");
 
+                }
+                intentos.setText(String.valueOf(Integer.parseInt(intentos.getText().toString())+1));
             }
         });
     }
