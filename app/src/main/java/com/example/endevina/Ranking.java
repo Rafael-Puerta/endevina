@@ -8,23 +8,35 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 public class Ranking extends AppCompatActivity {
-    String data="";
-    static ArrayList<Record> records = new ArrayList<Record>();
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Intent intent = getIntent();
-
-        MainActivity.rankin.forEach((n) -> data+=(n.getUser()+":"+n.getScore()+"\n"));
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ranking);
-        final TextView ranking = findViewById(R.id.records);
-        ranking.setText(data);
+        Intent intent = getIntent();
+        TableLayout tbl=(TableLayout) findViewById(R.id.tablecita);
+        MainActivity.rankin.forEach((n) -> {
+            //Creating new tablerows and textviews
+            TableRow row=new TableRow(this);
+            TextView txt1=new TextView(this);
+            TextView txt2=new TextView(this);
+            //setting the text
+            txt1.setText(n.getUser());
+            txt2.setText(n.getScore());
+            //the textviews have to be added to the row created
+            row.addView(txt1);
+            row.addView(txt2);
+            tbl.addView(row);
+        });
+
+        //setContentView(R.layout.activity_ranking);
+
     }
 
 }
