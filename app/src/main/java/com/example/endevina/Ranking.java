@@ -19,6 +19,8 @@ public class Ranking extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_ranking);
+
         Intent intent = getIntent();
         TableLayout tbl=(TableLayout) findViewById(R.id.tablecita);
         MainActivity.rankin.forEach((n) -> {
@@ -26,12 +28,15 @@ public class Ranking extends AppCompatActivity {
             TableRow row=new TableRow(this);
             TextView txt1=new TextView(this);
             TextView txt2=new TextView(this);
+            TextView txt3=new TextView(this);
             //setting the text
             txt1.setText(n.getUser());
-            txt2.setText(n.getScore());
+            txt1.setText(":");
+            txt3.setText(String.valueOf(n.getScore()));
             //the textviews have to be added to the row created
             row.addView(txt1);
             row.addView(txt2);
+            row.addView(txt3);
             tbl.addView(row);
         });
 
